@@ -8,6 +8,7 @@ package com.mycompany.bankaccounts.ui;
 import com.mycompany.bankaccounts.User.User;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,7 +54,7 @@ public class frame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         opDpiTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        opMountTextField = new javax.swing.JTextField();
+        opAmountTextField = new javax.swing.JTextField();
         opButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,6 +83,11 @@ public class frame extends javax.swing.JFrame {
         jLabel6.setText("Monto");
 
         opButton.setText("Hacer Operacion");
+        opButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                opButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,7 +127,7 @@ public class frame extends javax.swing.JFrame {
                                     .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(opMountTextField)
+                                    .addComponent(opAmountTextField)
                                     .addComponent(opDpiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -156,7 +162,7 @@ public class frame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(opMountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(opAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(opButton)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -168,6 +174,25 @@ public class frame extends javax.swing.JFrame {
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
         addAccount();
     }//GEN-LAST:event_addButtonMouseClicked
+
+    private void opButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_opButtonMouseClicked
+        if(!opDpiTextField.getText().isEmpty() && !opAmountTextField.getText().isEmpty())
+        {
+            Boolean isPresent = false;
+            for ( int i = 0; i < c; i++ ){
+                if ( accounts.get(i).getDpi().equals(opDpiTextField.getText())){
+                    accounts.get(i).deposit(opAmountTextField.getText());
+                    isPresent = true;
+                }
+            }
+            if(!isPresent){
+                JOptionPane.showMessageDialog(rootPane, "No tiene una cuenta en este Banco");
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No introdujo bien los datos");
+        }
+    }//GEN-LAST:event_opButtonMouseClicked
 
     private void addAccount(){
         accounts.add(c, new User(addDpiTextField.getText(), addNameTextField.getText(), addBalanceTextField.getText()));
@@ -224,10 +249,10 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField opAmountTextField;
     private javax.swing.JButton opButton;
     private javax.swing.JRadioButton opDepositRadioButton;
     private javax.swing.JTextField opDpiTextField;
-    private javax.swing.JTextField opMountTextField;
     private javax.swing.JRadioButton opRetireRadioButton;
     // End of variables declaration//GEN-END:variables
 }
