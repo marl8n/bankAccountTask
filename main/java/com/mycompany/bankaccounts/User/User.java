@@ -5,6 +5,9 @@
  */
 package com.mycompany.bankaccounts.User;
 
+import com.mycompany.bankaccounts.Utils.Utils;
+import static com.mycompany.bankaccounts.Utils.Utils.twoDecDouble;
+
 /**
  *
  * @author marl8n
@@ -13,6 +16,12 @@ public class User {
     private String dpi;
     private String name;
     private Double balance;
+    
+    public User(String dpi, String name, String balance){
+        this.dpi = dpi;
+        this.name = name;
+        this.balance = twoDecDouble.apply(balance);
+    }
 
     public String getDpi() {
         return dpi;

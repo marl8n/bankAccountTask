@@ -5,17 +5,29 @@
  */
 package com.mycompany.bankaccounts.ui;
 
+import com.mycompany.bankaccounts.User.User;
+import java.util.ArrayList;
+import javax.swing.ButtonGroup;
+
 /**
  *
  * @author marl8n
  */
 public class frame extends javax.swing.JFrame {
 
+    
+    ArrayList<User> accounts = new ArrayList<User>();
+    int c;
+    
     /**
      * Creates new form frame
      */
     public frame() {
         initComponents();
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(opDepositRadioButton);
+        buttonGroup.add(opRetireRadioButton);
+        
     }
 
     /**
@@ -36,8 +48,8 @@ public class frame extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        opDepositRadioButton = new javax.swing.JRadioButton();
+        opRetireRadioButton = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         opDpiTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -53,12 +65,17 @@ public class frame extends javax.swing.JFrame {
         jLabel3.setText("Saldo");
 
         addButton.setText("Agregar");
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addButtonMouseClicked(evt);
+            }
+        });
 
         jLabel4.setText("Deposito/Retiro");
 
-        jRadioButton1.setText("Deposito");
+        opDepositRadioButton.setText("Deposito");
 
-        jRadioButton2.setText("Retiro");
+        opRetireRadioButton.setText("Retiro");
 
         jLabel5.setText("DPi");
 
@@ -95,9 +112,9 @@ public class frame extends javax.swing.JFrame {
                         .addGap(130, 130, 130)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(opDepositRadioButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2))
+                                .addComponent(opRetireRadioButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -130,8 +147,8 @@ public class frame extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(opDepositRadioButton)
+                    .addComponent(opRetireRadioButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -148,6 +165,18 @@ public class frame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
+        addAccount();
+    }//GEN-LAST:event_addButtonMouseClicked
+
+    private void addAccount(){
+        accounts.add(c, new User(addDpiTextField.getText(), addNameTextField.getText(), addBalanceTextField.getText()));
+        addDpiTextField.setText("");
+        addNameTextField.setText("");
+        addBalanceTextField.setText("");
+        c++;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -194,11 +223,11 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton opButton;
+    private javax.swing.JRadioButton opDepositRadioButton;
     private javax.swing.JTextField opDpiTextField;
     private javax.swing.JTextField opMountTextField;
+    private javax.swing.JRadioButton opRetireRadioButton;
     // End of variables declaration//GEN-END:variables
 }
