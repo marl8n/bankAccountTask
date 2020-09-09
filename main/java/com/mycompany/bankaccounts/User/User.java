@@ -61,4 +61,8 @@ public class User {
         }
         return true;
     }
+    
+    public String getAccountData(){
+        return "Nombre: " + this.name + ", Saldo: " + this.balance + ", Dpi:" + this.dpi + "\n";
+    }
 }

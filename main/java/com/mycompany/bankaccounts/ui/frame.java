@@ -8,6 +8,7 @@ package com.mycompany.bankaccounts.ui;
 import com.mycompany.bankaccounts.User.User;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +29,7 @@ public class frame extends javax.swing.JFrame {
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(opDepositRadioButton);
         buttonGroup.add(opRetireRadioButton);
+        buttonGroup.add(opConsultAccountBalanceRadioButton);
         
     }
 
@@ -56,6 +58,9 @@ public class frame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         opAmountTextField = new javax.swing.JTextField();
         opButton = new javax.swing.JButton();
+        showUsers = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        opConsultAccountBalanceRadioButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,49 +94,67 @@ public class frame extends javax.swing.JFrame {
             }
         });
 
+        showUsers.setText("Mostrar Cuentas");
+        showUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showUsersMouseClicked(evt);
+            }
+        });
+
+        opConsultAccountBalanceRadioButton.setText("Consultar Saldo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(addButton)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(addDpiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(addNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(addBalanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(addButton)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(addDpiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(addNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(addBalanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(opDepositRadioButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(opRetireRadioButton))
+                                .addGap(163, 163, 163)
+                                .addComponent(jLabel4))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(130, 130, 130)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(opAmountTextField)
-                                    .addComponent(opDpiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(opButton)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(opAmountTextField)
+                                            .addComponent(opDpiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(opButton))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(showUsers))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(opDepositRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(opRetireRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(opConsultAccountBalanceRadioButton)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -154,7 +177,8 @@ public class frame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(opDepositRadioButton)
-                    .addComponent(opRetireRadioButton))
+                    .addComponent(opRetireRadioButton)
+                    .addComponent(opConsultAccountBalanceRadioButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -165,7 +189,11 @@ public class frame extends javax.swing.JFrame {
                     .addComponent(opAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(opButton)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(showUsers)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,8 +212,15 @@ public class frame extends javax.swing.JFrame {
         else if(opRetireRadioButton.isSelected()){
             retire();
         }
+        else if(opConsultAccountBalanceRadioButton.isSelected()){
+            showAccountDetails();
+        }
         cleanTextFields();
     }//GEN-LAST:event_opButtonMouseClicked
+
+    private void showUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showUsersMouseClicked
+        this.showAccounts();
+    }//GEN-LAST:event_showUsersMouseClicked
 
     private void addAccount(){
         accounts.add(c, new User(addDpiTextField.getText(), addNameTextField.getText(), addBalanceTextField.getText()));
@@ -203,6 +238,7 @@ public class frame extends javax.swing.JFrame {
                     operationPerformed = accounts.get(i).deposit(opAmountTextField.getText());
                     isPresent = true;
                     accountIdx = i;
+                    break;
                 }
             }
             if(!isPresent){
@@ -229,6 +265,7 @@ public class frame extends javax.swing.JFrame {
                     operationPerformed = accounts.get(i).retire(opAmountTextField.getText());
                     isPresent = true;
                     accountIdx = i;
+                    break;
                 }
             }
             if(!isPresent){
@@ -245,6 +282,36 @@ public class frame extends javax.swing.JFrame {
             
         }else{
             JOptionPane.showMessageDialog(rootPane, "No introdujo bien los datos");
+        }
+    }
+    
+    private void showAccounts()
+    {
+        String accountsAsString = "";
+        for ( int i = 0; i < c; i++ )
+        {
+            accountsAsString = accountsAsString.concat(accounts.get(i).getAccountData());
+        }
+        JOptionPane.showMessageDialog(rootPane, accountsAsString);
+    }
+    
+    private void showAccountDetails(){
+        if ( !opDpiTextField.getText().isEmpty() ){
+            Boolean isPresent = false;
+            int idx = -1;
+            for ( int i = 0; i < c; i++ ){
+                if( opDpiTextField.getText().equals(accounts.get(i).getDpi())){
+                    idx = i;
+                    isPresent = true;
+                    break;
+                }
+            }
+            if (isPresent){
+                JOptionPane.showMessageDialog(rootPane, accounts.get(idx).getAccountData());
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, "No tiene una cuenta con nosotros");
+            }
         }
     }
     
@@ -303,10 +370,13 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField opAmountTextField;
     private javax.swing.JButton opButton;
+    private javax.swing.JRadioButton opConsultAccountBalanceRadioButton;
     private javax.swing.JRadioButton opDepositRadioButton;
     private javax.swing.JTextField opDpiTextField;
     private javax.swing.JRadioButton opRetireRadioButton;
+    private javax.swing.JButton showUsers;
     // End of variables declaration//GEN-END:variables
 }
