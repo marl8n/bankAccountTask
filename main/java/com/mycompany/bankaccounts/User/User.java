@@ -5,7 +5,6 @@
  */
 package com.mycompany.bankaccounts.User;
 
-import com.mycompany.bankaccounts.Utils.Utils;
 import static com.mycompany.bankaccounts.Utils.Utils.twoDecDouble;
 
 /**
@@ -45,5 +44,21 @@ public class User {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+    
+    public Boolean deposit(String d){
+        this.balance += twoDecDouble.apply(d);
+        return true;
+    }
+    
+    public Boolean retire(String d){
+        Double buffer = twoDecDouble.apply(d);
+        if (this.balance >= buffer){
+            this.balance -= buffer;
+        }
+        else{
+            return false;
+        }
+        return true;
     }
 }

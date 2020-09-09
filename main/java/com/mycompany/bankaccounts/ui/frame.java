@@ -173,33 +173,87 @@ public class frame extends javax.swing.JFrame {
 
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
         addAccount();
+        JOptionPane.showMessageDialog(rootPane, "Operacion Realizada con Exito\n"+ accounts.get(c-1).getName()
+                        + "Saldo actual: " + accounts.get(c-1).getBalance());
     }//GEN-LAST:event_addButtonMouseClicked
 
     private void opButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_opButtonMouseClicked
+        if (opDepositRadioButton.isSelected()){
+            deposit();
+        }
+        else if(opRetireRadioButton.isSelected()){
+            retire();
+        }
+        cleanTextFields();
+    }//GEN-LAST:event_opButtonMouseClicked
+
+    private void addAccount(){
+        accounts.add(c, new User(addDpiTextField.getText(), addNameTextField.getText(), addBalanceTextField.getText()));
+        cleanTextFields();
+        c++;
+    }
+    
+    private void deposit(){
         if(!opDpiTextField.getText().isEmpty() && !opAmountTextField.getText().isEmpty())
         {
-            Boolean isPresent = false;
+            Boolean isPresent = false, operationPerformed = false;
+            int accountIdx = -1;
             for ( int i = 0; i < c; i++ ){
                 if ( accounts.get(i).getDpi().equals(opDpiTextField.getText())){
-                    accounts.get(i).deposit(opAmountTextField.getText());
+                    operationPerformed = accounts.get(i).deposit(opAmountTextField.getText());
                     isPresent = true;
+                    accountIdx = i;
                 }
             }
             if(!isPresent){
                 JOptionPane.showMessageDialog(rootPane, "No tiene una cuenta en este Banco");
             }
             
+            if (operationPerformed) {
+                JOptionPane.showMessageDialog(rootPane, "Operacion Realizada con Exito\n"+ accounts.get(accountIdx).getName()
+                        + "Saldo actual: " + accounts.get(accountIdx).getBalance());
+            }
+            
         }else{
             JOptionPane.showMessageDialog(rootPane, "No introdujo bien los datos");
         }
-    }//GEN-LAST:event_opButtonMouseClicked
-
-    private void addAccount(){
-        accounts.add(c, new User(addDpiTextField.getText(), addNameTextField.getText(), addBalanceTextField.getText()));
+    }
+    
+    private void retire(){
+        if(!opDpiTextField.getText().isEmpty() && !opAmountTextField.getText().isEmpty())
+        {
+            Boolean isPresent = false, operationPerformed = false;
+            int accountIdx = -1;
+            for ( int i = 0; i < c; i++ ){
+                if ( accounts.get(i).getDpi().equals(opDpiTextField.getText())){
+                    operationPerformed = accounts.get(i).retire(opAmountTextField.getText());
+                    isPresent = true;
+                    accountIdx = i;
+                }
+            }
+            if(!isPresent){
+                JOptionPane.showMessageDialog(rootPane, "No tiene una cuenta en este Banco");
+            }
+            
+            if (operationPerformed){
+                JOptionPane.showMessageDialog(rootPane, "Operacion Realizada con Exito\n"+ accounts.get(accountIdx).getName()
+                        + "Saldo actual: " + accounts.get(accountIdx).getBalance());
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, "No cuenta con fondos suficientes");
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No introdujo bien los datos");
+        }
+    }
+    
+    private void cleanTextFields(){
         addDpiTextField.setText("");
         addNameTextField.setText("");
         addBalanceTextField.setText("");
-        c++;
+        opDpiTextField.setText("");
+        opAmountTextField.setText("");
     }
     
     /**
